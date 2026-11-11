@@ -46,8 +46,8 @@ These credentials are created automatically on first startup, along with seed da
 - **Tags** — simple collection with a `name` field, used as the relationship target
 - **Posts** — collection with a `title` (text) and `tag` (relationship to Tags), where the bug is visible
 
-## Payload Version
+## Stack
 
-```
-payload@3.93.0
-```
+- `payload@3.93.0`
+- `@payloadcms/db-mongodb@3.93.0`
+- MongoDB (local instance)
