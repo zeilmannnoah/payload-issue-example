@@ -6,7 +6,9 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Tags } from './collections/Tags'
+import { Posts } from './collections/Posts'
+import { seed } from './seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,7 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Tags, Posts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -29,4 +31,14 @@ export default buildConfig({
   }),
   sharp,
   plugins: [],
+  onInit: async (payload) => {
+    const users = await payload.find({ collection: 'users', limit: 1 })
+    if (users.totalDocs === 0) {
+      await payload.create({
+        collection: 'users',
+        data: { email: 'dev@payloadcms.com', password: 'password' },
+      })
+    }
+    await seed(payload)
+  },
 })
