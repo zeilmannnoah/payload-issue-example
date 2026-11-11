@@ -2,6 +2,8 @@
 
 Minimal reproduction for a bug where selecting a value in a **relationship filter** on the admin list view causes the selected value to flash, clear, and then re-select.
 
+[flicker.gif](/gif/flicker.gif)
+
 ## Bug Description
 
 When filtering a collection by a `relationship` field in the admin list view, selecting a value from the dropdown causes the filter to:
